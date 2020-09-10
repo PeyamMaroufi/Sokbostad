@@ -45,10 +45,6 @@ def walin_items_li():
             items_walin[temp_keys + ' ' +
                         str(item + 1)] = (temp_values, url_img[item])
 
-        for key, value in items_walin.items():
-            print(key)
-            print(value)
-            print('------')
             # calculate mds Hash
 
             # compare the hash with the stored hash, different? do something
