@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup, SoupStrainer
+import requests
 
 
 class Waling:
