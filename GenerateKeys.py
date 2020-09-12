@@ -44,4 +44,4 @@ class KeyGeneration:
         walin_page = requests.get(url)
         hash_md5 = hashlib.sha256(walin_page.text.encode('utf-8')).hexdigest()
         if not (hash_md5 == keys.read_key()):
-            keys.create_md5(hash_md5)
+            self.create_md5(hash_md5)
