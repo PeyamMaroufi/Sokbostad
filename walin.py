@@ -5,26 +5,38 @@ items_walin = {}
 
 
 def walin_items_li():
+    """
+    Getting the existing items from walin webpage. It uses
+    the beautiful library to gather all section tagged with h3
+    and img. Looking for the image url and link url, gathering
+    them in a list to be able to show them later. Each element
+    has a link and image so no complicated algorithm is required
 
+    Algorithm:
+    1. Call website
+    2. Catch the content
+    3. Parse
+    4. Look up h3,img with conditions
+    """
+
+    # Local variables
     # Get the source of the page
     urls = "https://wahlinfastigheter.se/lediga-objekt/lagenheter/"
+    # Base url to add to the image url
     base_url = "https://wahlinfastigheter.se"
-    r1 = requests.get(urls)
-    print(r1.status_code)
+    # Gathering h3 and image addresses
     url_h3 = []
     url_img = []
 
-    # Wåhlins fastighet
+    # Calling the website
+    r1 = requests.get(urls)
+    # If the request was succesful then go on
     if r1.status_code == 200:
 
         coverpage = r1.content
-
         soup1 = BeautifulSoup(coverpage, 'html.parser')
-
         coverpage_news = soup1.find_all(
             ['h3', 'img'], class_=['block-title', 'lazy'])
-
-        print(len(coverpage_news))
 
         for item in coverpage_news:
 
@@ -37,7 +49,7 @@ def walin_items_li():
             if item.name == 'img' and (item.attrs['alt'] not in ['Parkering', 'Lokaler', 'Förråd']):
                 url_img.append(base_url + item.attrs['data-src'])
 
-            # replace out all the parts we don't need
+        # replace out all the parts we don't need
         for item in range(0, len(url_h3)):
             temp_keys = list(url_h3[item].keys())[0]
             temp_values = list(url_h3[item].values())[0]
