@@ -1,6 +1,5 @@
-import hashlib
 from bs4 import BeautifulSoup, SoupStrainer
-import requests
+import GenerateKeys as keys
 
 items_walin = {}
 
@@ -45,25 +44,4 @@ def walin_items_li():
             items_walin[temp_keys + ' ' +
                         str(item + 1)] = (temp_values, url_img[item])
 
-
-def check_md5(hash_sha=None):
-    walin_page = requests.get(
-        "https://wahlinfastigheter.se/lediga-objekt/lagenheter/")
-    hash_md5 = hashlib.sha256(walin_page.text.encode('utf-8')).hexdigest()
-
-    new_hash = True if not hash_md5 == hash_sha else False
-
-    # compare the hash with the stored hash, different? do something
-
-
-def create_md5(create=True):
-    with open('hash_key', 'w') as f:
-        walin_page = requests.get(
-            "https://wahlinfastigheter.se/lediga-objekt/lagenheter/")
-        hash_md5 = hashlib.sha256(walin_page.text.encode('utf-8')).hexdigest()
-        f.write(hash_md5)
-
-    # store the new hash
-
-
-create_md5()
+    return items_walin
