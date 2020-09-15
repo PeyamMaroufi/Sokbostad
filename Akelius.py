@@ -62,6 +62,4 @@ class Akelius:
                 items_walin[temp_keys] = (
                     temp_values, address_li[item], desc_li[item], rent_temp)
 
-
-a = Akelius()
-a.akelius_items_li()
+        return items_walin
