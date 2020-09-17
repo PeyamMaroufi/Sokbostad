@@ -2,11 +2,11 @@ from bs4 import BeautifulSoup, SoupStrainer
 import requests
 
 
-class Hasselby:
+class Heba:
     def __init__(self):
         pass
 
-    def hasselby_items_li(self):
+    def heba_items_li(self):
         """
             Getting the existing items from Akelius webpage. It uses
             the beautiful library to gather all section tagged with h3
@@ -22,16 +22,16 @@ class Hasselby:
             input:
                 none
             output:
-                items_hasselby     - dictionary containing img url and link
+                heba_items     - dictionary containing img url and link
                                   and title
         """
         # Local variables
         # Dictionary to collect all info
-        items_hasselby = {}
+        heba_items = {}
         # Get the source of the page
-        urls = "https://bostad.hasselbyhem.se/HSS/Object/object_list.aspx?cmguid=4e6e781e-5257-403e-b09d-7efc8edb0ac8&objectgroup=1"
+        urls = "https://www.hebafast.se/ledigt/ungdomsbostad"
         # Base url to add to the image url
-        base_url = "https://bostad.hasselbyhem.se/HSS/Object/"
+        base_url = "https://www.hebafast.se/ledigt/"
         r1 = requests.get(urls)
 
         if r1.status_code == 200:
@@ -49,8 +49,15 @@ class Hasselby:
                 room_str = coverpage_news[i+3].string
                 size_str = coverpage_news[i+4].string
                 rent_str = coverpage_news[i+5].string
-                items_hasselby[title_str] = (
+                heba_items[title_str] = (
                     base_url + link_str, address_str, room_str, size_str, rent_str)
-                i += 8
+                i += 7
 
-        return items_hasselby
+        return heba_items
+
+
+a = Heba()
+obj = a.heba_items_li()
+for key, values in obj.items():
+    print(key)
+    print(values)

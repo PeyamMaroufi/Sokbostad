@@ -7,9 +7,27 @@ class Akelius:
         pass
 
     def akelius_items_li(self):
+        """
+            Getting the existing items from Akelius webpage. It uses
+            the beautiful library to gather all section tagged with h3
+            and img. Looking for the image url and link url, gathering
+            them in a list to be able to show them later. Each element
+            has a link and image so no complicated algorithm is required
+
+            Algorithm:
+            1. Call website
+            2. Catch the content
+            3. Parse
+
+            input:
+                none
+            output:
+                akelius_items     - dictionary containing img url and link
+                                  and title
+        """
         # Local variables
         # Dictionary to collect all info
-        items_walin = {}
+        akelius_items = {}
         # Get the source of the page
         urls = "https://rent.akelius.com/sv/search/sweden/apartment/stockholm"
         # Base url to add to the image url
@@ -59,7 +77,7 @@ class Akelius:
                     size_temp = room_size_floor[desc + 1]
                     floor_temp = room_size_floor[desc + 2]
                     desc_li.append([rum_temp, size_temp, floor_temp])
-                items_walin[temp_keys] = (
+                akelius_items[temp_keys] = (
                     temp_values, address_li[item], desc_li[item], rent_temp)
 
-        return items_walin
+        return akelius_items
