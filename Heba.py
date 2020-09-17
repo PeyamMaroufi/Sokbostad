@@ -8,7 +8,7 @@ class Heba:
 
     def heba_items_li(self):
         """
-            Getting the existing items from Akelius webpage. It uses
+            Getting the existing items from Heba webpage. It uses
             the beautiful library to gather all section tagged with h3
             and img. Looking for the image url and link url, gathering
             them in a list to be able to show them later. Each element
