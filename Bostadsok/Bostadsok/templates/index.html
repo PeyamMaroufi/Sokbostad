@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" type="text/css"
+            href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+        <title>Först till kvarn lägenheter</title>
+    </head>
+
+    <body>
+
+        <head>Förstahandslägenheter - Gratis notifikation</head>
+        <div class="nav-section">
+            <nav class="nav nav-pills flex-column flex-sm-row">
+                <a class="flex-sm-fill text-sm-center nav-link active" href="#">Active</a>
+                <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+                <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+                <a class="flex-sm-fill text-sm-center nav-link " href="#">Disabled</a>
+            </nav>
+        </div>
+        <div class="outside">
+            <div class="card-header ">
+                WALIN
+            </div>
+            <div class="list-group">
+                {% for key, value in walin.items %}
+                <a href="{{value.0 }}" class="list-group-item list-group-item-action">
+                    <p>Object: {{ key }}</p>
+                    <p>Rooms</p>
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="card-header">
+                AKELLIUS
+            </div>
+            <div class="list-group">
+                {% for key, value in akellius.items %}
+                <a href="{{value.0 }}" class="list-group-item list-group-item-action">
+                    <p>Object: {{ key }}</p>
+                    <p>Rooms</p>
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="card-header">
+                HÄSSELBYHEM
+            </div>
+            <div class="list-group">
+                {% for key, value in hasselby.items %}
+                <a href="{{value.0 }}" class="list-group-item list-group-item-action">
+                    <p>Object: {{ key }}</p>
+                    <p>Rooms</p>
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="card-header">
+                HEBA
+            </div>
+            <div class="list-group">
+                {% for key, value in heba.items %}
+                <a href="{{value.0 }}" class="list-group-item list-group-item-action">
+                    <p>Object: {{ key }}</p>
+                    <p>Rooms</p>
+                </a>
+                {% endfor %}
+            </div>
+
+            <div class="card-header">
+                WÄSBYHEM
+            </div>
+            <div class="list-group">
+                {% for key, value in wasbyhem.items %}
+                <a href="{{value.0 }}" class="list-group-item list-group-item-action">
+                    <p>Object: {{ key }}</p>
+                    <p>Rooms</p>
+                </a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </body>
+
+</html>
