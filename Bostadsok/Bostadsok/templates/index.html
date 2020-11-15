@@ -14,7 +14,6 @@
 
     <body>
 
-        <head>Förstahandslägenheter - Gratis notifikation</head>
         <div class="nav-section">
             <nav class="nav nav-pills flex-column flex-sm-row">
                 <a class="flex-sm-fill text-sm-center nav-link active" href="#">Hem</a>
@@ -30,8 +29,12 @@
             <div class="list-group">
                 {% for key, value in walin.items %}
                 <a href="{{value.0 }}" class="list-group-item list-group-item-action">
-                    <p>Object: {{ key }}</p>
-                    <p>Rooms</p>
+                    <p>Objekt: {{ key }}</p>
+                    <p><span class="badge badge-pill badge-secondary">Antal rum: {{value.1}}</span>
+                        <span class="badge badge-pill badge-secondary">Storlek: {{value.2}}</span>
+                        <span class="badge badge-pill badge-secondary">Våning: {{value.3}}</span>
+                        <span class="badge badge-pill badge-secondary">Hyra: {{value.4}}</span>
+                    </p>
                 </a>
                 {% endfor %}
             </div>
@@ -42,8 +45,12 @@
             <div class="list-group">
                 {% for key, value in akellius.items %}
                 <a href="{{value.0 }}" class="list-group-item list-group-item-action">
-                    <p>Object: {{ key }}</p>
-                    <p>Rooms</p>
+                    <p>Objekt: {{ key }}</p>
+                    <p><span class="badge badge-pill badge-secondary">Antal rum: {{value.2.0}}</span>
+                        <span class="badge badge-pill badge-secondary">Storlek: {{value.2.1}}</span>
+                        <span class="badge badge-pill badge-secondary">Våning: {{value.2.2}}</span>
+                        <span class="badge badge-pill badge-secondary">Hyra: {{value.3}}</span>
+                    </p>
                 </a>
                 {% endfor %}
             </div>
@@ -54,8 +61,11 @@
             <div class="list-group">
                 {% for key, value in hasselby.items %}
                 <a href="{{value.0 }}" class="list-group-item list-group-item-action">
-                    <p>Object: {{ key }}</p>
-                    <p>Rooms</p>
+                    <p>Objekt: {{ key }}</p>
+                    <p><span class="badge badge-pill badge-secondary">Antal rum: {{value.2}}</span>
+                        <span class="badge badge-pill badge-secondary">Storlek: {{value.3}}</span>
+                        <span class="badge badge-pill badge-secondary">Hyra: {{value.4}}</span>
+                    </p>
                 </a>
                 {% endfor %}
             </div>
@@ -66,8 +76,11 @@
             <div class="list-group">
                 {% for key, value in heba.items %}
                 <a href="{{value.0 }}" class="list-group-item list-group-item-action">
-                    <p>Object: {{ key }}</p>
-                    <p>Rooms</p>
+                    <p>Objekt: {{ key }}</p>
+                    <p><span class="badge badge-pill badge-secondary">Antal rum: {{value.2}}</span>
+                        <span class="badge badge-pill badge-secondary">Storlek: {{value.3}}</span>
+                        <span class="badge badge-pill badge-secondary">Hyra: {{value.4}}</span>
+                    </p>
                 </a>
                 {% endfor %}
             </div>
@@ -78,8 +91,11 @@
             <div class="list-group">
                 {% for key, value in wasbyhem.items %}
                 <a href="{{value.0 }}" class="list-group-item list-group-item-action">
-                    <p>Object: {{ key }}</p>
-                    <p>Rooms</p>
+                    <p>Objekt: {{ key }}</p>
+                    <p><span class="badge badge-pill badge-secondary">Antal rum: {{value.2}}</span>
+                        <span class="badge badge-pill badge-secondary">Storlek: {{value.3}}</span>
+                        <span class="badge badge-pill badge-secondary">Hyra: {{value.4}}</span>
+                    </p>
                 </a>
                 {% endfor %}
             </div>

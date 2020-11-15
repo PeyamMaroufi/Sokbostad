@@ -29,16 +29,12 @@ class Walin:
                                   and title
             """
 
-        # Local variables
-        # Dictionary to collect all info
-        items_walin = {}
         # Get the source of the page
         urls = "https://wahlinfastigheter.se/lediga-objekt/lagenheter/"
         # Base url to add to the image url
         base_url = "https://wahlinfastigheter.se"
         # Gathering h3 and image addresses
-        url_h3 = []
-        url_img = []
+
         items_walin = {}
 
         # Calling the website
@@ -49,29 +45,31 @@ class Walin:
             coverpage = r1.content
             soup1 = BeautifulSoup(coverpage, 'html.parser')
             coverpage_news = soup1.find_all(
-                ['h3', 'img'], class_=['block-title', 'lazy'])
+                ['h3'], class_='block-title')
 
             for item in coverpage_news:
 
                 if item.attrs['class'][0] == 'block-title' and (item.text not in ['\nParkering\n', '\nLokaler\n', '\nFörråd\n']):
 
+                    # Text and discribtion of the apartment
                     temp_url = item.find('a', href=True)
-                    temp_url_desc = {temp_url.get_text(): (
-                        temp_url.attrs['href'])}
-                    url_h3.append(temp_url_desc)
+                    name = temp_url.text
+                    name_link = temp_url.attrs['href']
 
-                if item.name == 'img' and (item.attrs['alt'] not in ['Parkering', 'Lokaler', 'Förråd']):
-                    url_img.append(base_url + item.attrs['data-src'])
+                    # Go to the link of the partment to get more information
+                    r2 = requests.get(name_link)
+                    coverpage2 = r2.content
+                    soup2 = BeautifulSoup(coverpage2, 'html.parser')
+                    coverpage_link = soup2.find_all(
+                        ['span'], class_='data')
 
-            # replace out all the parts we don't need
-            for item in range(0, len(url_h3)):
-                temp_keys = list(url_h3[item].keys())[0]
-                temp_values = list(url_h3[item].values())[0]
-                items_walin[temp_keys + ' ' +
-                            str(item + 1)] = (temp_values, url_img[item])
+                    # pick only rok, size and rent
+                    rok = coverpage_link[3].text
+                    size = coverpage_link[4].text
+                    floor = coverpage_link[5].text
+                    rent = coverpage_link[7].text
 
-            return items_walin
+                    # Gather all information
+                    items_walin[name] = [name_link, rok, size, floor, rent]
 
-
-a = Walin.walin_items_li()
-print(a)
+        return items_walin

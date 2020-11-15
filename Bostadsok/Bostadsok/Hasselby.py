@@ -55,3 +55,7 @@ class Hasselby:
                 i += 8
 
         return items_hasselby
+
+
+a = Hasselby()
+b = a.hasselby_items_li()
