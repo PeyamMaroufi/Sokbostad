@@ -11,7 +11,7 @@ Detta är ett python project med Django. Ville bekanta mig med frontend och back
 * Ha Django installerat på din burk (Python3.7 kör jag)
 * Vill du starta servern och allt:
 
-        cd Bostadnsok/
+        cd Bostadsok/
         python3 manage.py runserver
 * Gå in på https://127.0.01:8000. Där finns dina lägenheter.
 
