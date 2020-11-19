@@ -10,35 +10,39 @@ class Walin:
     @staticmethod
     def walin_items_li():
         """
+            ## DESCRIPOTION
+            Static function
+
             Getting the existing items from walin webpage. It uses
             the beautiful library to gather all section tagged with h3
             and img. Looking for the image url and link url, gathering
             them in a list to be able to show them later. Each element
             has a link and image so no complicated algorithm is required
 
-            Algorithm:
+            walin_items = (Link to the apartment, Number of rooms,
+                          Size, Floor, Rent)
+
+            ## ALGORITHM
             1. Call website
             2. Catch the content
             3. Parse
             4. Look up h3,img with conditions
 
-            input:
+            ## INPUTS
                 none
-            output:
-                items_walin     - dictionary containing img url and link
-                                  and title
+            ## OUTPUTS
+                walin_items     - Dictionary containing link, rooms, size
+                                  floor and rent
             """
 
+        walin_items = {}
         # Get the source of the page
-        urls = "https://wahlinfastigheter.se/lediga-objekt/lagenheter/"
+        waling_base_url = "https://wahlinfastigheter.se/lediga-objekt/lagenheter/"
         # Base url to add to the image url
-        base_url = "https://wahlinfastigheter.se"
-        # Gathering h3 and image addresses
-
-        items_walin = {}
-
+        url_list_of_apartmens = "https://wahlinfastigheter.se"
         # Calling the website
-        r1 = requests.get(urls)
+        r1 = requests.get(waling_base_url)
+
         # If the request was succesful then go on
         if r1.status_code == 200:
 
@@ -70,6 +74,6 @@ class Walin:
                     rent = coverpage_link[7].text
 
                     # Gather all information
-                    items_walin[name] = [name_link, rok, size, floor, rent]
+                    walin_items[name] = [name_link, rok, size, floor, rent]
 
-        return items_walin
+        return walin_items
