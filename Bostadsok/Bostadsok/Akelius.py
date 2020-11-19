@@ -9,37 +9,46 @@ class Akelius:
     @staticmethod
     def akelius_items_li():
         """
+            ## DESCRIPTION
+            Static function
+
             Getting the existing items from Akelius webpage. It uses
             the beautiful library to gather all section tagged with h3
             and img. Looking for the image url and link url, gathering
             them in a list to be able to show them later. Each element
             has a link and image so no complicated algorithm is required
 
-            Algorithm:
+            The output structure is :
+            akelius_items = (Link to the object, apartment's address,
+                             describtion of the apartment such as flooe
+                             and size, rent)
+            ## ALGORITHM:
             1. Call website
             2. Catch the content
             3. Parse
 
-            input:
+            ## INPUTS:
                 none
-            output:
+
+            ## OUTPUTS:
                 akelius_items     - dictionary containing img url and link
                                   and title
+
         """
         # Local variables
         # Dictionary to collect all info
         akelius_items = {}
         # Get the source of the page
-        urls = "https://rent.akelius.com/sv/search/sweden/apartment/stockholm"
+        url_list_of_apartmens = "https://rent.akelius.com/sv/search/sweden/apartment/stockholm"
         # Base url to add to the image url
-        base_url = "https://rent.akelius.com"
+        waling_base_url = "https://rent.akelius.com"
         # Gathering h3 and image addresses
         url_title_link = []
         room_size_floor = []
         rent_li = []
         address_li = []
         desc_li = []
-        r1 = requests.get(urls)
+        r1 = requests.get(url_list_of_apartmens)
 
         if r1.status_code == 200:
 
@@ -54,7 +63,7 @@ class Akelius:
                     title_temp = item.string
                     link_temp = item.contents[0].contents[0].attrs['href']
                     title_link_temp_dic = {
-                        title_temp: base_url + str(link_temp)}
+                        title_temp: waling_base_url + str(link_temp)}
                     url_title_link.append(title_link_temp_dic)
 
                 if item.attrs['class'][0] == 'fact':

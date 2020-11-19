@@ -9,31 +9,40 @@ class Heba:
     @staticmethod
     def heba_items_li():
         """
+            ## DESCRIPTION
+            Static function
+
             Getting the existing items from Heba webpage. It uses
             the beautiful library to gather all section tagged with h3
             and img. Looking for the image url and link url, gathering
             them in a list to be able to show them later. Each element
             has a link and image so no complicated algorithm is required
 
-            Algorithm:
+
+            heba_items = (Link to the apartment
+                          address of the apartment,
+                          number of rooms,
+                          size of the apartment,
+                          rent of the apartment)
+            ## ALGORITHM
             1. Call website
             2. Catch the content
             3. Parse
 
-            input:
+            ## INPUTS
                 none
-            output:
-                heba_items     - dictionary containing img url and link
-                                  and title
+            ## OUTPUTS
+                heba_items     - Dictionary containing link, address,
+                                 rooms, size and rent
         """
         # Local variables
         # Dictionary to collect all info
         heba_items = {}
         # Get the source of the page
-        urls = "https://www.hebafast.se/ledigt/ungdomsbostad"
+        url_list_of_apartmens = "https://www.hebafast.se/ledigt/ungdomsbostad"
         # Base url to add to the image url
-        base_url = "https://www.hebafast.se/ledigt/"
-        r1 = requests.get(urls)
+        heba_base_url = "https://www.hebafast.se/ledigt/"
+        r1 = requests.get(url_list_of_apartmens)
 
         if r1.status_code == 200:
 
@@ -51,14 +60,7 @@ class Heba:
                 size_str = coverpage_news[i+4].string
                 rent_str = coverpage_news[i+5].string
                 heba_items[title_str] = (
-                    base_url + link_str, address_str, room_str, size_str, rent_str)
+                    heba_base_url + link_str, address_str, room_str, size_str, rent_str)
                 i += 7
 
         return heba_items
-
-
-a = Heba()
-obj = a.heba_items_li()
-for key, values in obj.items():
-    print(key)
-    print(values)

@@ -9,31 +9,40 @@ class Hasselby:
     @staticmethod
     def hasselby_items_li():
         """
+            ## DESCRIPTION
+            Static function
+
             Getting the existing items from Hässelby webpage. It uses
             the beautiful library to gather all section tagged with h3
             and img. Looking for the image url and link url, gathering
             them in a list to be able to show them later. Each element
             has a link and image so no complicated algorithm is required
 
-            Algorithm:
+            hasselby_items = (Link to the apartment
+                              address of the apartment,
+                              number of rooms,
+                              size of the apartment,
+                              rent of the apartment)
+
+            ## ALGORITHM:
             1. Call website
             2. Catch the content
             3. Parse
 
-            input:
+            ## INPUT:
                 none
-            output:
-                items_hasselby     - dictionary containing img url and link
-                                  and title
+            ## OUTPUT:
+                hasselby_items     - dictionary containing img url and link
+                                     and title
         """
         # Local variables
         # Dictionary to collect all info
-        items_hasselby = {}
+        hasselby_items = {}
         # Get the source of the page
-        urls = "https://bostad.hasselbyhem.se/HSS/Object/object_list.aspx?cmguid=4e6e781e-5257-403e-b09d-7efc8edb0ac8&objectgroup=1"
+        url_list_of_apartmens = "https://bostad.hasselbyhem.se/HSS/Object/object_list.aspx?cmguid=4e6e781e-5257-403e-b09d-7efc8edb0ac8&objectgroup=1"
         # Base url to add to the image url
-        base_url = "https://bostad.hasselbyhem.se/HSS/Object/"
-        r1 = requests.get(urls)
+        hasselby_base_url = "https://bostad.hasselbyhem.se/HSS/Object/"
+        r1 = requests.get(url_list_of_apartmens)
 
         if r1.status_code == 200:
 
@@ -50,12 +59,7 @@ class Hasselby:
                 room_str = coverpage_news[i+3].string
                 size_str = coverpage_news[i+4].string
                 rent_str = coverpage_news[i+5].string
-                items_hasselby[title_str] = (
-                    base_url + link_str, address_str, room_str, size_str, rent_str)
+                hasselby_items[title_str] = (
+                    hasselby_base_url + link_str, address_str, room_str, size_str, rent_str)
                 i += 8
-
-        return items_hasselby
-
-
-a = Hasselby()
-b = a.hasselby_items_li()
+        return hasselby_items
