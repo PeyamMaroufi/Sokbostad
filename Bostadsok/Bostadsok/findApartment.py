@@ -30,15 +30,60 @@ def walin_items(host_variable):
 
 
 def printAllApartment():
-    for item in walin_items():
-        print(item)
+
+    items = [list(Walin.walin_items_li().items()),
+             list(Walin.walin_items_li().items()),
+             list(Hasselby.hasselby_items_li().items()),
+             list(WasbyHem.wasby_items_li().items()),
+             list(Akelius.akelius_items_li().items()),
+             list(Heba.heba_items_li().items())]
+    Description = "Description"
+    Host = "Host"
+    Rooms = "Rooms"
+    Size = "Size"
+    print("--------------------------------------------------------------------------------------")
+    print(f"{Description:{25}}{Host:{25}}{Rooms:{10}}{Size:{10}}Rent")
+    print("--------------------------------------------------------------------------------------")
+    for item in items:
+        for i in item:
+            description = i[0][0:14]
+            start_string_page = i[1][0][i[1][0].find('/')+2:]
+            end_string_page = start_string_page[:start_string_page.find('/')]
+            if 'wahlinfastigheter' in end_string_page:
+                rooms = i[1][1].lstrip()
+                rooms = rooms.replace("rok", "") if "rok" in rooms else rooms
+                rooms = rooms.replace(" ", "")
+                size = i[1][2].lstrip()
+                size = size.replace("kvm", "") if "kvm" in size else size
+                rent = i[1][4].lstrip()
+                rent = rent.replace("kr/mån", "") if "kr/mån" in rent else rent
+                rent = rent.replace(
+                    "ad", "") if "ad" in rent else rent
+
+            elif 'akelius' in end_string_page:
+                description = description.lstrip()
+                rooms = i[1][2][0].lstrip()
+                rooms = rooms.replace("rum", "") if "rum" in rooms else rooms
+                rooms = rooms.replace(" ", "") if " " in rooms else rooms
+                size = i[1][2][1].lstrip()
+                size = size.replace("m²", "") if "m²" in size else size
+                rent = i[1][3].lstrip()
+                rent = rent.replace("SEK", "") if "SEK" in rent else rent
+                rent = rent.replace(" ", "") if " " in rent else rent
+            else:
+                rooms = i[1][2].lstrip()
+                size = i[1][3].lstrip()
+                rent = i[1][4].lstrip()
+                rent = rent.replace("Â", "") if "Â" in rent else rent
+            print(
+                f"{description:20}{end_string_page:30}{rooms:10}{size:10}{rent}")
 
 
 def main():
     parser = argparse.ArgumentParser(
         description='Print information on available housings.')
     parser.add_argument(
-        "-a", "--all", help="List of all available housings from all hosts", required=False, dest="all_apartments", default=False)
+        "-a", help="List of all available housings from all hosts", required=False, dest="all_apartments", default=False)
     parser.add_argument(
         "-l", help="Show apartments from a specified host\n\tHosts:\n\tHeba\n\tHasselbyhem\n\tWaling\n\tWasbyhem\n\tAkelius", required=False, dest="host_var", type=str)
     parser.add_argument(
@@ -50,7 +95,6 @@ def main():
     output_yes = arguments.output_yes
 
     if all_apartments:
-        print("hi")
         printAllApartment()
 
     if host_var is not None:
@@ -68,4 +112,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    printAllApartment()
