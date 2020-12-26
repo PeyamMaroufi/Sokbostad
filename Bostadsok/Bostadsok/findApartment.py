@@ -155,5 +155,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    # printAllApartment()
-    # choose_host(-1)
