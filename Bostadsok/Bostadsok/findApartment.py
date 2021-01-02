@@ -12,6 +12,7 @@ from Akelius import Akelius
 from WasbyHem import WasbyHem
 from Hasselby import Hasselby
 from Walin import Walin
+from Ikano import Ikano
 
 """
 # DESCRIPTION
@@ -35,6 +36,9 @@ def choose_host(host_variable):
     elif host_variable == 4:
         items5 = list(Hasselby.hasselby_items_li().items())
         printAllApartment(items5)
+    elif host_variable ==5:
+        items6 = list(Ikano.ikano_items_li().items())
+        printAllApartment(items6)
 
 
 def printTable():
@@ -118,7 +122,7 @@ def main():
     yes = arguments.yes_integer
 
     if all_apartments:
-        hosts = [0, 1, 2, 3, 4]
+        hosts = [0, 1, 2, 3, 4, 5]
         printTable()
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -130,7 +134,7 @@ def main():
                     print('Generated a stupid exception: %s' % (exc))
 
     if host_var is not None:
-        if host_var >= 0 and host_var < 5:
+        if host_var >= 0 and host_var < 6:
             printTable()
             choose_host(host_var)
         else:
@@ -138,7 +142,7 @@ def main():
                 "The host you provided does not exist. Enter en integer between [0-4] from:\n0. Wåhlin\n1. Akelius\n2. Wäsby\n3. Heba\n4. Hässelby")
 
     if yes is not None:
-        hosts = [0, 1, 2, 3, 4]
+        hosts = [0, 1, 2, 3, 4, 5]
         try:
             while True:
                 os.system('cls' if os.name == 'nt' else 'clear')

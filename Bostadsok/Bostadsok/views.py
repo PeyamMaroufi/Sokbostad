@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . import Walin, WasbyHem, Heba, Hasselby, Akelius
+from . import Walin, WasbyHem, Heba, Hasselby, Akelius, Ikano
 
 
 def index(request):
@@ -8,7 +8,8 @@ def index(request):
         "akellius": get_akellius(),
         "hasselby": get_hasselby(),
         "heba": get_heba(),
-        "wasbyhem": get_wasbyhem()
+        "wasbyhem": get_wasbyhem(),
+        "ikano": get_ikano()
     })
 
 
@@ -30,3 +31,7 @@ def get_heba():
 
 def get_wasbyhem():
     return WasbyHem.WasbyHem.wasby_items_li()
+
+
+def get_ikano():
+    return Ikano.Ikano.ikano_items_li()
