@@ -1,13 +1,17 @@
-
-from Walin import Walin
-from Hasselby import Hasselby
-from WasbyHem import WasbyHem
-from Akelius import Akelius
-from Heba import Heba
 import argparse
 import concurrent.futures
 import time
 import os
+import sys
+
+absPath = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(absPath)
+
+from Heba import Heba
+from Akelius import Akelius
+from WasbyHem import WasbyHem
+from Hasselby import Hasselby
+from Walin import Walin
 
 """
 # DESCRIPTION
@@ -16,25 +20,21 @@ the results."""
 
 
 def choose_host(host_variable):
-    if host_variable >= 0 and host_variable < 5:
-        if host_variable == 0 or host_variable == -1:
-            items1 = list(Walin.walin_items_li().items())
-            printAllApartment(items1)
-        elif host_variable == 1 or host_variable == -1:
-            items2 = list(Akelius.akelius_items_li().items())
-            printAllApartment(items2)
-        elif host_variable == 2 or host_variable == -1:
-            items3 = list(WasbyHem.wasby_items_li().items())
-            printAllApartment(items3)
-        elif host_variable == 3 or host_variable == -1:
-            items4 = list(Heba.heba_items_li().items())
-            printAllApartment(items4)
-        elif host_variable == 4 or host_variable == -1:
-            items5 = list(Hasselby.hasselby_items_li().items())
-            printAllApartment(items5)
-    else:
-        print(
-            "The host you provided does not exist. Enter en integer between [0-4] from:\n0. Wåhlin\n1. Akelius\n2. Wäsby\n3. Heba\n4. Hässelby")
+    if host_variable == 0:
+        items1 = list(Walin.walin_items_li().items())
+        printAllApartment(items1)
+    elif host_variable == 1:
+        items2 = list(Akelius.akelius_items_li().items())
+        printAllApartment(items2)
+    elif host_variable == 2:
+        items3 = list(WasbyHem.wasby_items_li().items())
+        printAllApartment(items3)
+    elif host_variable == 3:
+        items4 = list(Heba.heba_items_li().items())
+        printAllApartment(items4)
+    elif host_variable == 4:
+        items5 = list(Hasselby.hasselby_items_li().items())
+        printAllApartment(items5)
 
 
 def printTable():
@@ -110,7 +110,7 @@ def main():
     parser.add_argument(
         "-l", help="Show apartments from a specified host:\n0. Wåhlin\n1. Akelius\n2. Wäsby\n3. Heba\n4. Hässelby", required=False, dest="host_integer", type=int)
     parser.add_argument(
-        "-y", help="Continuously output apartments from all hosts:\n0. Wåhlin\n1. Akelius\n2. Wäsby\n3. Heba\n4. Hässelby", required=False, dest="yes_integer", type=int, default=5)
+        "-y", help="Continuously output apartments from all hosts:\n0. Wåhlin\n1. Akelius\n2. Wäsby\n3. Heba\n4. Hässelby", required=False, dest="yes_integer", type=int)
 
     arguments = parser.parse_args()
     all_apartments = arguments.all_apartments
@@ -130,7 +130,12 @@ def main():
                     print('Generated a stupid exception: %s' % (exc))
 
     if host_var is not None:
-        choose_host(host_var)
+        if host_var >= 0 and host_var < 5:
+            printTable()
+            choose_host(host_var)
+        else:
+            print(
+                "The host you provided does not exist. Enter en integer between [0-4] from:\n0. Wåhlin\n1. Akelius\n2. Wäsby\n3. Heba\n4. Hässelby")
 
     if yes is not None:
         hosts = [0, 1, 2, 3, 4]
