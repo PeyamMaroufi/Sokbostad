@@ -1,5 +1,9 @@
-## Vad är Bostadsök?
-Detta är ett python project med Django. Ville bekanta mig med frontend och backend programmering. Gjorde då en enkel bostadssökare som tittar på lediga lägenheter hos följande hyresvärdar:
+# Vad är Bostadsök?
+En applikation som hittar senaste först-till-kvarn lägenheter i Stockholm. Detta består av två delar:
++ Backend som också finns i .deb paketeringsformat för Linux-användare
++ Fronted och backend för de som vil hosta den på sin egen server.Denna del är gjord i Python och Django med html och css samt Bootstrap.
+
+Jag började med det här projektet för jag sökte lägenhet och ville lära mig Django. Appen kollar lediga lägenheter hos följande hyresvärdar:
 * Hässelbyhem
 * Heba
 * Wålinfastigheter
@@ -25,9 +29,7 @@ Detta är ett python project med Django. Ville bekanta mig med frontend och back
 
 ![Snapshot](img/bostadsok_terminal.png)
 
----
-
-## Hur kan jag vidareutveckla det här projektet?
+## Backend-Frontend
 * Klona ner repot
 * Ha Django installerat på din burk (Python3.7 kör jag)
 * Vill du starta servern och allt:
@@ -38,10 +40,12 @@ Detta är ett python project med Django. Ville bekanta mig med frontend och back
 
 * Gå in på https://127.0.01:8000. Där finns dina lägenheter.
 
+![Snapshot](img/screenshot.png)
+
+---
 ## Planer
 Om jag kommer på några andra hyresvärdar så kan jag lägga till dem också. Källkoden finns här. Vill du hosta det på din egen server så var så god. Vill du ändra något så klona och ändra. :)
 Följande är en snapshot av sidan.
 
-![Snapshot](img/screenshot.png)
 
 
